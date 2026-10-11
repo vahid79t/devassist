@@ -1,0 +1,2 @@
+class InvalidTicketStatusTransitionError(Exception): 
+    pass
