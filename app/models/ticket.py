@@ -1,12 +1,16 @@
 from app.enums.ticket_status import TicketStatus
 from app.exceptions.ticket_exceptions import InvalidTicketStatusTransitionError
+from app.enums.ticket_priority import TicketPriority
 
 
 class Ticket:
-    def __init__(self, title: str, description: str) -> None:
+    def __init__(self, title: str, description: str, priority: TicketPriority = TicketPriority.MEDIUM) -> None:
         self.title = title
         self.description = description
         self.status = TicketStatus.OPEN
+        if not isinstance(priority, TicketPriority):
+            raise TypeError("priority must be a TicketPriority")
+        self.priority = priority
 
     def get_summary(self) -> str:
         return f"{self.title} - {self.description}"
